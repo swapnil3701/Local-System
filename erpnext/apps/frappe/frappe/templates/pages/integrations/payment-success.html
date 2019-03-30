@@ -1,0 +1,27 @@
+{% extends "templates/web.html" %}
+
+{% block title %}{{ _("Payment Success") }}{% endblock %}
+
+{%- block page_content -%}
+<div class='page-card'>
+	<div class='page-card-head'>
+		<span class='indicator green'>
+			{{ _("Success") }}</span>
+	</div>
+	<p>{{ _("Your payment was successfully accepted") }}</p>
+	<div><a href='{{ frappe.form_dict.redirect_to or "/" }}' class='btn btn-primary btn-sm'>
+		{{ _("Continue") }}</a></div>
+</div>
+<style>
+{% include "templates/styles/card_style.css" %}
+</style>
+<script>
+	frappe.ready(function() {
+		if('{{ frappe.form_dict.redirect_to or "" }}'){
+			setTimeout(function(){
+				window.location.href = '{{ frappe.form_dict.redirect_to }}';
+			}, 6000);
+		}
+	})
+</script>
+{% endblock %}
